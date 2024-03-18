@@ -1,17 +1,31 @@
 import React, { useState } from "react";
 
-function Modal({ closeModal, handleChange, prompt, setPrompt }) {
+function Modal({
+  closeModal,
+  handleChange,
+  prompt,
+  setPrompt,
+  sendTextToParent,
+}) {
   const [generate, setGenerate] = useState(false);
 
   const handleChangeNew = (e) => {
     setPrompt(e.target.value);
     setGenerate(false);
   };
+
   const handleGenerate = (e) => {
     if (prompt) {
       setGenerate(true);
     }
   };
+
+  const insert = () => {
+    sendTextToParent(dummyTxt);
+  };
+
+  const dummyTxt =
+    " Thank you for the opportunity! If you have any more questions or if there's anything else I can help you with, feel free to ask.";
 
   return (
     <div>
@@ -26,9 +40,7 @@ function Modal({ closeModal, handleChange, prompt, setPrompt }) {
               </div>
               <div className="md:w-9/12">
                 <div className="w-auto bg-blue-200 text-gray-500 font-light text-gray text-justify mr-auto w-auto p-2 rounded-xl text-xs md:text-sm">
-                  Thank you for the opportunity! If you have any more questions
-                  or if there's anything else I can help you with, feel free to
-                  ask.
+                  {dummyTxt}
                 </div>
               </div>
             </div>
@@ -45,7 +57,10 @@ function Modal({ closeModal, handleChange, prompt, setPrompt }) {
           <div className="ml-auto">
             {generate ? (
               <div className="flex gap-2 items-insert">
-                <button className="flex items-center gap-2 text-xs text-gray-700 border-2 border-gray-400 md:text-sm px-2 pr-3 py-1.5 rounded-lg hover:opacity-80">
+                <button
+                  onClick={insert}
+                  className="flex items-center gap-2 text-xs text-gray-700 border-2 border-gray-400 md:text-sm px-2 pr-3 py-1.5 rounded-lg hover:opacity-80"
+                >
                   <svg
                     width="10"
                     height="10"
